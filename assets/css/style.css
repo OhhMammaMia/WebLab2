@@ -39,12 +39,9 @@ a {
 }
 
 option {
-	color: black;
-}
-
-option:first-child {
 	color: grey;
 }
+
 
 .little-pic {
 	width: 40px;
@@ -79,6 +76,7 @@ option:first-child {
 	margin-left: auto;
     margin-right: auto;
 	width: 60%;
+	height: 30px;
 }
 
 .top-content-pic {
@@ -106,7 +104,10 @@ option:first-child {
 	text-align: center;
 	margin: 0px auto;
 }
-
+.error-reg-p {
+	margin-left: auto;
+	margin-right: auto;
+}
 
 .btn {
 	background-color: #3481c9;

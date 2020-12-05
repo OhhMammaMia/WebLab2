@@ -29,14 +29,15 @@
 		<form action="create.php" method="post" id="reg-form">
 			<input type="text" name="firstname" placeholder="First name" required><br>
 			<input type="text" name="lastname" placeholder="Last name" required><br>
-			<select class="form-fields" required>
+			<select class="form-fields" name="role" required>
+				<option value="" selected>Select role</option>
 				<optgroup label="Select role">
-				<option value="1" selected>User</option>
+				<option value="1">User</option>
 				<option value="2">Admin</option>
 			</select><br>
 			<input type="email" name="email" placeholder="Email" required><br>
 			<input type="password" name="password" placeholder="Password" required><br>
-			<input type="password" name="password" placeholder="Repeat password" required><br>
+			<input type="password" name="password2" placeholder="Repeat password" required><br>
 			<input type="submit" class="btn" value="Sign Up">
 		</form>
 	</div>
