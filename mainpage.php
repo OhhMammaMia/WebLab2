@@ -27,7 +27,7 @@
 	// пользователь авторизован
 	if(isset($_SESSION['email']) && isset($_SESSION['first_name']))
 	{
-		echo "<p class='top-content-text'>". $_SESSION['first_name'] ." <b>|</b> <a href='logOut.php'>Log Out</a></p>";
+		echo "<p class='top-content-text'><a href='userProfile.php?id=". $_SESSION['user_id'] ."'>". $_SESSION['first_name'] ."</a> <b>|</b> <a href='logOut.php'>Log Out</a></p>";
 	}
 	// пользователь не авторизован
 	else

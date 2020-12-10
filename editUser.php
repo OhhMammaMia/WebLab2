@@ -48,19 +48,17 @@ if(isset($_POST["submit"])) {
     }
 }
 
-// Check if file already exists
-if (file_exists($target_file)) {
-    echo "File already exists.";
-    $uploadOk = 2;
-}
-
-if(!file_exists($_FILES['fileToUpload']['tmp_name']) || !is_uploaded_file($_FILES['fileToUpload']['tmp_name'])) {
-    echo 'You didn`t upload the file';
+if(!file_exists($_FILES['fileToUpload']['tmp_name']) || !is_uploaded_file($_FILES['fileToUpload']['tmp_name']))
 	$uploadOk=3;
-}
 
 if($uploadOk!=3)
 {
+	// Check if file already exists
+	if (file_exists($target_file)) {
+		echo "File already exists.";
+		$uploadOk = 2;
+	}
+
 	// Check file size
 	if ($_FILES["fileToUpload"]["size"] > 500000) {
 		echo "Sorry, your file is too large.";

@@ -50,6 +50,8 @@ if(isset($_SESSION['delete_user_id']))
 		exit();
 	}
 	
+	if($_SESSION['delete_user_id'] == $_SESSION['user_id'])
+		header('Location: logOut.php');
 	
 	mysqli_close($conn);
 }

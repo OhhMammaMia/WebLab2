@@ -100,7 +100,7 @@ if(isset($_GET['id']))
 						<input type='email' name='email' placeholder='Email' value='". $row['email'] ."' disabled><br>";
 						if($userType==2) // админ может менять роль
 						{
-							echo "<select class='form-fields' name='role' >
+							echo "<select class='form-fields' name='role' required>
 								<option value=''>Select role</option>
 								<optgroup label='Select role'>";
 							
