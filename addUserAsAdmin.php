@@ -16,7 +16,7 @@
 <!--Верхняя панель (чёрная)-->
 <header class="header-bar">
 	<img src="assets/img/3points.png" class="header-bar-img">
-	<p class="header-p">Sign Up</p>
+	<p class="header-p">Add new user</p>
 </header>
 
 <!--Панель с лого и действиями-->
@@ -41,7 +41,7 @@
 		
 	?>
 	<div class="form-div">
-		<form action="create.php" method="post" id="reg-form">
+		<form action="createNewUserAsAdmin.php" method="post" id="reg-form">
 			<input type="text" name="firstname" placeholder="First name" required><br>
 			<input type="text" name="lastname" placeholder="Last name" required><br>
 			<select class="form-fields" name="role" required>

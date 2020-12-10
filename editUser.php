@@ -27,6 +27,7 @@
 </div>
 
 <div class="form-div">
+
 <?php 
 
 // проверка файла на пригодность
@@ -53,23 +54,31 @@ if (file_exists($target_file)) {
     $uploadOk = 2;
 }
 
-// Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
-    echo "Sorry, your file is too large.";
-    $uploadOk = 0;
+if(!file_exists($_FILES['fileToUpload']['tmp_name']) || !is_uploaded_file($_FILES['fileToUpload']['tmp_name'])) {
+    echo 'You didn`t upload the file';
+	$uploadOk=3;
 }
 
-// Allow certain file formats
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
-    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-    $uploadOk = 0;
+if($uploadOk!=3)
+{
+	// Check file size
+	if ($_FILES["fileToUpload"]["size"] > 500000) {
+		echo "Sorry, your file is too large.";
+		$uploadOk = 0;
+	}
+
+	// Allow certain file formats
+	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+	&& $imageFileType != "gif" ) {
+		echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+		$uploadOk = 0;
+	}
 }
 
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
+	// if everything is ok, try to upload file
 }
 else
 {
@@ -90,7 +99,8 @@ else
 
 		$first_name = $_POST['firstname'];
 		$last_name = $_POST['lastname'];
-		$role = (int)$_POST['role'];
+		if(isset($_POST['role']))
+			$role = (int)$_POST['role'];
 		$password = $_POST['password'];
 		$password2= $_POST['password2'];
 		
@@ -127,7 +137,7 @@ else
 		if($is_successful)
 		{
 			// добавление пуути файла в БД
-			$sql = "UPDATE users SET first_name='$first_name', last_name='$last_name', role_id=$role, password='$password' 
+			$sql = "UPDATE users SET first_name='$first_name', last_name='$last_name', ". ((isset($_POST['role']))?"role_id=$role," : "") ."password='$password' 
 				WHERE id=".$_SESSION['edit_user_id'];
 			
 			if (mysqli_query($conn, $sql))
@@ -142,7 +152,7 @@ else
 			{
 				echo "New record created successfully<br>";
 				
-				if($uploadOk!=2)
+				if($uploadOk!=2 && $uploadOk!=3)
 				{
 					// файл загружается на сервер
 					if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))

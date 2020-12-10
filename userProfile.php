@@ -98,20 +98,32 @@ if(isset($_GET['id']))
 						<input type='text' name='lastname' placeholder='Last name' value='". $row['last_name'] ."' ".
 							(($userType == 2 || (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $_GET['id']))?"required":"disabled") ."><br>
 						<input type='email' name='email' placeholder='Email' value='". $row['email'] ."' disabled><br>";
-						if($userType==2)
+						if($userType==2) // админ может менять роль
 						{
 							echo "<select class='form-fields' name='role' >
 								<option value=''>Select role</option>
 								<optgroup label='Select role'>";
-								if($row['role_id']==1)
-									echo	"<option value='1' selected>User</option>
-											<option value='2'>Admin</option>	</select><br>";
-								if($row['role_id']==2)
-									echo	"<option value='1'>User</option>
-											<option value='2' selected>Admin</option>	</select><br>";
+							
+							$result_role = mysqli_query($conn, "SELECT * FROM roles;");
+							$row_role = mysqli_fetch_array($result_role);
+							while(is_array($row_role))
+							{
+								// вывод ролей
+								echo "<option value='".$row_role['id']."' ". ($row_role['id']== $row['role_id']? "selected" : "") .">". $row_role['title'] ."</option>";
+								$row_role = mysqli_fetch_array($result_role);
+							}
+							echo	"</select><br>";
 						}
 						else 
-							echo "<input type='text' name='role' value='".(($row['role_id']==2)?"Admin":"User")."' disabled><br>";
+						{
+							$result_role = mysqli_query($conn, "SELECT title FROM roles WHERE id=".$row['role_id'].";");
+							$row_role = mysqli_fetch_array($result_role);
+							if(is_array($row_role))
+								echo "<input type='text' value='". $row_role['title'] ."' disabled><br>";
+							else
+								echo "<input type='text' value='Sorry. Error :(' disabled><br>";
+						}
+						
 						
 					if($userType == 2 || (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $_GET['id']))
 					{

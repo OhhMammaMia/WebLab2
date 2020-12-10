@@ -119,6 +119,14 @@
 		// очищаем результат
 		mysqli_free_result($res);
 	}
+	
+	if($is_admin==true)
+	{
+		echo	"<br>
+				<form action='addUserAsAdmin.php' method='post'>
+					<input type='submit' class='btn' value='Add User'>
+				</form>";
+	}
 
 	mysqli_close($conn);
 ?>
@@ -137,14 +145,14 @@
 		
 		<form action="signIn.php" method="post">
 		
-			<table class="form-table">
-				<tr>
-					<td class="input-name">Email</td><td><input type="email" name="email" required></td><br>
-				</tr>
-				<tr>
-					<td class="input-name">Password</td><td><input type="password" name="password" required></td><br>
-				</tr>
-			</table>
+			<div class="form-table">
+				<div class="field">
+					<label for="email">Email</label><input type="email" name="email" required><br>
+				</div>
+				<div class="field">
+					<label for="password">Password</label><input type="password" name="password" required><br>
+				</div>
+			</div>
 			
 			<br>
 			<hr>

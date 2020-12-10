@@ -5,11 +5,18 @@
 }
 
 .form-table {
-	margin: auto;
+	margin: 0px auto;
+	width: 270px;
 }
 
-.input-name {
-	min-width: 100px;
+.field {
+	clear: both;
+	text-align: right;
+	line-height: 25px;
+}
+label {
+	float: left;
+	padding-right: 10px;
 }
 
 
